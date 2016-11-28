@@ -5,10 +5,8 @@
  */
 package cw2;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Random;
+import java.math.BigInteger;
+
 
 /**
  *
@@ -24,21 +22,21 @@ public class watek implements Runnable {
             this.ile=ile;
         }
         
-        public long rekurencyjne (long ile) {
+        public BigInteger rekurencyjne (long ile) {
             if (ile<2) {
-                return 1;
+                return BigInteger.valueOf(1);
             }
-            return ile*rekurencyjne(ile-1);
+            return BigInteger.valueOf(ile).multiply(rekurencyjne(ile-1));
         }
         
-        public long iteracyjne (long ile) {
-            long wynik=1;
+        public BigInteger iteracyjne (long ile) {
+            BigInteger wynik = new BigInteger ("1");
             
             if (ile==0) {
-                return 0;
+                return wynik;
             } else {
                 while (ile>0) {
-                    wynik *= ile;
+                    wynik = wynik.multiply(BigInteger.valueOf(ile));
                     ile--;
                 } 
             return wynik;
@@ -46,7 +44,7 @@ public class watek implements Runnable {
         }
         
         public void run() {
-            long wynik=0;
+            BigInteger wynik = new BigInteger ("0");
             
             if (name=="rekurencyjnie") {
                 
