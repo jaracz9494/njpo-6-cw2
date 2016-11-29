@@ -5,7 +5,12 @@
  */
 package cw2;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Scanner;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,6 +23,22 @@ public class Cw2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        JFrame frame = new JFrame ("Silnia");
+        JButton przycisk = new JButton("Nie chcę dłużej czekać");
+        
+        
+        
+        
+        
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300,200);
+        frame.setVisible(true);
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        panel.add(przycisk);
+        
+        
         watek[] wat = new watek[ILE];
         
         Scanner sc = new Scanner (System.in);
@@ -28,12 +49,21 @@ public class Cw2 {
         System.out.println("podaj cyfre:");
         podaj = Integer.parseInt(sc.nextLine());
         System.out.println();
+        przycisk.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent evt) {
+                    wat[0].interrupt();
+                    wat[1].interrupt();    
+                    //System.exit(0);
+                }
+        });
         
         wat[0] = new watek("iteracyjnie", podaj);
-        wat[0].run();
+        wat[0].start();
+        
         
         wat[1] = new watek("rekurencyjnie", podaj);
-        wat[1].run();        
+        wat[1].start();    
+        
         
     }
     

@@ -12,7 +12,7 @@ import java.math.BigInteger;
  *
  * @author Dominik
  */
-public class watek implements Runnable {
+public class watek extends Thread {
     
         String name;
         long ile, start, stop;
@@ -23,10 +23,25 @@ public class watek implements Runnable {
         }
         
         public BigInteger rekurencyjne (long ile) {
+            boolean przerwanie=false;
+            
             if (ile<2) {
                 return BigInteger.valueOf(1);
             }
+            
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                System.out.println("Przerwano działanie watku: " + name);
+                przerwanie = true;
+            }
+            
+            if(przerwanie == true) {
+                return BigInteger.valueOf(1);
+            }
+                    
             return BigInteger.valueOf(ile).multiply(rekurencyjne(ile-1));
+            
         }
         
         public BigInteger iteracyjne (long ile) {
@@ -35,15 +50,23 @@ public class watek implements Runnable {
             if (ile==0) {
                 return wynik;
             } else {
+                try {
                 while (ile>0) {
+                    
                     wynik = wynik.multiply(BigInteger.valueOf(ile));
                     ile--;
+                    Thread.sleep(100);
+                    
                 } 
+            } catch (InterruptedException e) {
+                System.out.println("Przerwano działanie watku: " + name);
+            }
             return wynik;
             }
         }
         
         public void run() {
+        
             BigInteger wynik = new BigInteger ("0");
             
             if (name=="rekurencyjnie") {
@@ -52,7 +75,8 @@ public class watek implements Runnable {
                 wynik = rekurencyjne(ile);
                 stop = System.nanoTime();
                 
-                System.out.println("Silnia rekurencyjnie:");               
+                System.out.println("Silnia rekurencyjnie:"); 
+                
                 
             }
             
@@ -69,6 +93,7 @@ public class watek implements Runnable {
             System.out.println("Wynik: " + wynik + "\n");
             
             
+        
             
         }
     }
