@@ -12,10 +12,12 @@ import java.math.BigInteger;
  *
  * @author Dominik
  */
+
 public class watek extends Thread {
     
         String name;
         long ile, start, stop;
+        BigInteger wynik = new BigInteger ("0");
         
         watek(String name, long ile) {
             this.name=name;
@@ -45,29 +47,30 @@ public class watek extends Thread {
         }
         
         public BigInteger iteracyjne (long ile) {
-            BigInteger wynik = new BigInteger ("1");
+            BigInteger wyn = new BigInteger ("1");
             
             if (ile==0) {
-                return wynik;
+                return wyn;
             } else {
                 try {
                 while (ile>0) {
                     
-                    wynik = wynik.multiply(BigInteger.valueOf(ile));
+                    wyn = wyn.multiply(BigInteger.valueOf(ile));
                     ile--;
                     Thread.sleep(100);
                     
                 } 
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 System.out.println("Przerwano działanie watku: " + name);
             }
-            return wynik;
+            return wyn;
             }
         }
         
         public void run() {
         
-            BigInteger wynik = new BigInteger ("0");
+            
             
             if (name=="rekurencyjnie") {
                 
@@ -89,11 +92,18 @@ public class watek extends Thread {
                 
             }
             
+            
             System.out.println("Czas: " + (stop - start));
             System.out.println("Wynik: " + wynik + "\n");
+                  
             
-            
+        }
         
-            
+        public BigInteger wyswietl_wyn() {
+            return wynik;
+        }
+        
+        public long wysw_czas() {
+            return (stop - start);
         }
     }

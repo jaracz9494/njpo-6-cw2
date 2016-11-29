@@ -19,8 +19,10 @@ import javax.swing.JTextField;
 public class okienko {
         JFrame frame = new JFrame ("Silnia");
         JButton przycisk = new JButton("Nie chcę dłużej czekać");
+        /*
         JTextField iter = new JTextField();
         JTextField reku = new JTextField();
+        */
     
     public void okienko() {  
         
@@ -36,11 +38,14 @@ public class okienko {
         przycisk.setBounds(50, 10, 200, 50);
         panel.add(przycisk);
         
-        iter.setBounds(40, 80, 200, 20);
+        /*
+        iter.setBounds(50, 80, 200, 20);
         panel.add(iter);
         
-        reku.setBounds(40, 110, 200, 20);
+        reku.setBounds(50, 110, 200, 20);
         panel.add(reku);
+        */
+       
     }
     
     public void nasluch(watek[] wat) {
@@ -48,7 +53,7 @@ public class okienko {
                 public void actionPerformed(ActionEvent evt) {
                     wat[0].interrupt();
                     wat[1].interrupt();    
-                    //System.exit(0);
+                    System.exit(0);
                 }
         });
     }
