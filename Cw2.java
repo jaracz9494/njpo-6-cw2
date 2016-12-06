@@ -34,12 +34,14 @@ public class Cw2 {
         System.out.println();
         o.nasluch(wat);
         
-        wat[0] = new watek("iteracyjnie", podaj);
+        
+        wat[0] = new watek("iteracyjnie", podaj, o);
+        //wat[0].run(o);
         wat[0].start();
         
-        
-        wat[1] = new watek("rekurencyjnie", podaj);
-        wat[1].start();    
+        wat[1] = new watek("rekurencyjnie", podaj, o);
+        //wat[1].run(o); 
+        wat[1].start();
         
         
     }

@@ -18,10 +18,13 @@ public class watek extends Thread {
         String name;
         long ile, start, stop;
         BigInteger wynik = new BigInteger ("0");
+        okienko o = new okienko();
         
-        watek(String name, long ile) {
+        watek(String name, long ile, okienko o) {
             this.name=name;
             this.ile=ile;
+            this.o=o;
+            
         }
         
         public BigInteger rekurencyjne (long ile) {
@@ -69,6 +72,7 @@ public class watek extends Thread {
         }
         
         public void run() {
+            
         
             
             
@@ -79,6 +83,7 @@ public class watek extends Thread {
                 stop = System.nanoTime();
                 
                 System.out.println("Silnia rekurencyjnie:"); 
+                o.ustaw_reku(wynik.toString(), Long.toString(stop-start));
                 
                 
             }
@@ -89,8 +94,10 @@ public class watek extends Thread {
                 stop = System.nanoTime();
                 
                 System.out.println("Silnia iteracyjnie:");
+                o.ustaw_iter(wynik.toString(), Long.toString(stop-start));
                 
             }
+            
             
             
             System.out.println("Czas: " + (stop - start));
