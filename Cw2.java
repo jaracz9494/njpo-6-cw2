@@ -20,7 +20,6 @@ public class Cw2 {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner (System.in);
-        long podaj;
         
         watek[] wat = new watek[ILE];
         
@@ -28,20 +27,12 @@ public class Cw2 {
         o.okienko();
            
         
-        System.out.println("LICZENIE SILNI");
-        System.out.println("podaj cyfre:");
-        podaj = Integer.parseInt(sc.nextLine());
-        System.out.println();
+        System.out.println("ROZPOCZĘTO LICZENIE SILNI");
+        
         o.nasluch(wat);
+        o.nasluch_run(wat, o);
         
         
-        wat[0] = new watek("iteracyjnie", podaj, o);
-        //wat[0].run(o);
-        wat[0].start();
-        
-        wat[1] = new watek("rekurencyjnie", podaj, o);
-        //wat[1].run(o); 
-        wat[1].start();
         
         
     }

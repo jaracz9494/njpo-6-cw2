@@ -8,6 +8,7 @@ package cw2;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +21,12 @@ import javax.swing.JTextField;
 public class okienko {
         JFrame frame = new JFrame ("Silnia");
         JButton przycisk = new JButton("Nie chcę dłużej czekać");
+        
+        JLabel podaj_l = new JLabel("Dla:");
+        JFormattedTextField podaj_liczbe = new JFormattedTextField();
+        
+        JButton licz = new JButton("LICZ!");
+        
         
         JLabel napis_iter = new JLabel("Iteracyjnie:");
         JLabel napis_iter_w = new JLabel("Wynik");
@@ -40,7 +47,7 @@ public class okienko {
         
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300,450);
+        frame.setSize(300,400);
         frame.setVisible(true);
         
         JPanel panel = new JPanel();
@@ -51,39 +58,49 @@ public class okienko {
         przycisk.setBounds(50, 10, 200, 50);
         panel.add(przycisk);
         
+        podaj_l.setBounds(15, 70, 35, 20);
+        panel.add(podaj_l);
+        podaj_liczbe.setBounds(50, 70, 200, 20);
+        podaj_liczbe.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0"))));
+        panel.add(podaj_liczbe); 
         
-        napis_iter.setBounds(50, 60, 200, 20);
+        
+        licz.setBounds(110, 95, 80, 30);
+        panel.add(licz);
+        
+        
+        napis_iter.setBounds(50, 130, 200, 20);
         panel.add(napis_iter);                
         
-        napis_iter_w.setBounds(5, 80, 35, 20);
+        napis_iter_w.setBounds(5, 150, 35, 20);
         panel.add(napis_iter_w);
         
-        iter_w.setBounds(50, 80, 200, 20);
+        iter_w.setBounds(50, 150, 200, 20);
         iter_w.setEditable(false);
         panel.add(iter_w);
         
-        napis_iter_c.setBounds(5, 110, 30, 20);
+        napis_iter_c.setBounds(5, 180, 30, 20);
         panel.add(napis_iter_c);
         
-        iter_c.setBounds(50, 110, 200, 20);
+        iter_c.setBounds(50, 180, 200, 20);
         iter_c.setEditable(false);
         panel.add(iter_c);
         
         
-        napis_reku.setBounds(50, 140, 200, 20);
+        napis_reku.setBounds(50, 210, 200, 20);
         panel.add(napis_reku);
         
-        napis_reku_w.setBounds(5, 160, 35, 20);
+        napis_reku_w.setBounds(5, 230, 35, 20);
         panel.add(napis_reku_w);
         
-        reku_w.setBounds(50, 160, 200, 20);
+        reku_w.setBounds(50, 230, 200, 20);
         reku_w.setEditable(false);
         panel.add(reku_w);
         
-        napis_reku_c.setBounds(5, 190, 30, 20);
+        napis_reku_c.setBounds(5, 260, 30, 20);
         panel.add(napis_reku_c);
         
-        reku_c.setBounds(50, 190, 200, 20);
+        reku_c.setBounds(50, 260, 200, 20);
         reku_c.setEditable(false);
         panel.add(reku_c);
         
@@ -100,14 +117,41 @@ public class okienko {
         reku_c.setText(czas);
     }
     
+    
+    //public void liczMouseClicked(java.awt.event.MouseEvent evt) {
+        
+        
+        
+    
+    
+    public void nasluch_run(watek[] wat, okienko o) {
+        licz.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent evt) {
+                    if (podaj_liczbe.getText().equals("")) {
+                        podaj_liczbe.setText("0");
+                    }
+                    
+                    wat[0] = new watek("iteracyjnie", Long.parseLong(podaj_liczbe.getText()), o);
+                    wat[0].start();
+
+                    wat[1] = new watek("rekurencyjnie", Long.parseLong(podaj_liczbe.getText()), o); 
+                    wat[1].start();
+                    
+                    System.out.println();
+                }
+        });
+    }
+    
     public void nasluch(watek[] wat) {
         przycisk.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
                     wat[0].interrupt();
                     wat[1].interrupt(); 
-                    //System.exit(0);
+
+                    System.out.println();
                 }
         });
     }
+   
 }
     
