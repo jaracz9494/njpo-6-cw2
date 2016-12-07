@@ -118,7 +118,12 @@ public class okienko {
     }
     
     
-    //public void liczMouseClicked(java.awt.event.MouseEvent evt) {
+    public void ustaw_puste() {
+        iter_w.setText("");
+        iter_c.setText("");
+        reku_w.setText("");
+        reku_c.setText("");
+    }
         
         
         
@@ -127,6 +132,9 @@ public class okienko {
     public void nasluch_run(watek[] wat, okienko o) {
         licz.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
+                    
+                    ustaw_puste();
+                    
                     if (podaj_liczbe.getText().equals("")) {
                         podaj_liczbe.setText("0");
                     }
@@ -137,7 +145,6 @@ public class okienko {
                     wat[1] = new watek("rekurencyjnie", Long.parseLong(podaj_liczbe.getText()), o); 
                     wat[1].start();
                     
-                    System.out.println();
                 }
         });
     }
@@ -145,10 +152,18 @@ public class okienko {
     public void nasluch(watek[] wat) {
         przycisk.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent evt) {
+                    
+                    if (podaj_liczbe.getText().equals("")) {
+                        podaj_liczbe.setText("0");
+                    }
+                    
+                    try {
                     wat[0].interrupt();
                     wat[1].interrupt(); 
+                    
+                    } catch (NullPointerException e) {
 
-                    System.out.println();
+                    }
                 }
         });
     }

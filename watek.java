@@ -71,7 +71,17 @@ public class watek extends Thread {
             }
         }
         
-        public void run() {                  
+        public void run() {                           
+            
+            if (name=="iteracyjnie") {
+                start = System.nanoTime();
+                wynik = iteracyjne(ile);
+                stop = System.nanoTime();
+                
+                //System.out.println("Silnia iteracyjnie:");
+                o.ustaw_iter(wynik.toString(), Long.toString(stop-start));
+                
+            }
             
             if (name=="rekurencyjnie") {
                 
@@ -85,30 +95,13 @@ public class watek extends Thread {
                 
             }
             
-            if (name=="iteracyjnie") {
-                start = System.nanoTime();
-                wynik = iteracyjne(ile);
-                stop = System.nanoTime();
-                
-                //System.out.println("Silnia iteracyjnie:");
-                o.ustaw_iter(wynik.toString(), Long.toString(stop-start));
-                
-            }
-            
             
             
             //System.out.println("Czas: " + (stop - start));
             //System.out.println("Wynik: " + wynik + "\n");
-            System.out.println("Wykonano dla: " + name);
+            //System.out.println("Wykonano dla: " + name);
                   
             
         }
         
-        public BigInteger wyswietl_wyn() {
-            return wynik;
-        }
-        
-        public long wysw_czas() {
-            return (stop - start);
-        }
     }
